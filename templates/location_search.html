@@ -1,0 +1,55 @@
+{% include "header.html" %}
+<div class="container container-body">
+<body>
+<h1>Find the location of an item : </h1>
+
+<hr>
+<form method="POST" action="/location_search">
+	<td>
+		<select name="entityname">	
+    		<option value = "book" > book</option>
+    		<option value = "dvd" > dvd </option>
+		</select>
+	</td>
+<input type="search" name="bookname" value = '' required> <input type="submit" value="search">
+
+
+</form>
+<hr>
+<h3>The {{entity}} you entry is <I><B>{{name}}</B></I>. Here is your search result : </h3>
+
+
+<div class="Librarian">           
+  <table class="table table-bordered">
+  <thead>
+      <tr>
+        <th>{{entity}}name</th>
+        <th>Libraryname</th>
+        <th>Address</th>
+      </tr>
+	</thead>
+	<tbody>
+    	{% for n in locations %}
+		<tr>
+			{% for x in n %}
+			<td>{{x}}</td>
+			{% endfor %}
+		</tr>   
+		{% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<hr>
+<h5>Some sample search book name:Harry Potter, The Great Believers, There There, Elevation</h5>
+<h5>Some sample search dvd name: Harry Potter, Die Hard, When Harry Met Sally, Toy Story</h5>
+<h5>The upper case or lower case does not matter</h5>
+
+<hr>
+
+
+</body>
+</div>
+{% include "footer.html" %}
+
+

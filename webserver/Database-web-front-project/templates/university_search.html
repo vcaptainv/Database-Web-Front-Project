@@ -1,0 +1,49 @@
+{% include "header.html" %}
+<div class="container container-body">
+<body>
+<h1>University Search</h1>
+<hr>
+<h3>Here you are search all the books in a specific University </h3>
+<p> If the page is not refresh, click the search button below to refresh the page</p>
+<hr>
+<form method="POST" action="/university_search">
+	<td>
+		<select name="schoolname">	
+    	{% for n in university %}	
+    		<option value = "{{n}}" > {{n}}</option>
+    	{% endfor %}
+		</select>
+	</td>
+<input type="submit" value="search">
+
+<hr>
+
+<h3>The name of the University you enter is: {{schoolnames}}</h3>           
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      {% for bookcolumn in bookcolumns %}
+        <th>{{bookcolumn}}</th>
+      {% endfor %}
+      </tr>
+    </thead>
+	<tbody>
+    	{% for schoolbook in schoolbooks%}
+		<tr>
+			{% for x in schoolbook %}
+			<td>{{x}}</td>
+			{% endfor %}
+		</tr>   
+		{% endfor %}
+    </tbody>
+</table>
+
+
+</form>
+
+<hr>
+
+
+</body>
+</div>
+{% include "footer.html" %}

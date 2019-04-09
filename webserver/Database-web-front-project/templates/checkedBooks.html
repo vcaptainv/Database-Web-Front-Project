@@ -1,0 +1,42 @@
+{% include "header.html" %}
+
+<div class="container container-body">
+<body>
+<hr>
+<h1>Checked book Search</h1>
+<h5>Here a specific librarian can check the book he checked out</h5>
+<p> Enter a librarian name to check the list of book he checked out</p>
+<form method="POST" action="/checkedBooks">
+<input type="search" name='name' value = '' required> <input type="submit" value="search">
+</form>
+<hr>
+<h3>The librarian name You enter is: {{name}}</h3>
+<div class="Librarian">           
+  <table class="table table-bordered">
+	<thead>
+	<tr>
+      	{% for cname in columnname %}
+        	<th>{{cname}}</th>
+     	 {% endfor %}
+    </tr>
+	</thead>
+	<tbody>
+    	{% for n in books %}
+		<tr>
+			{% for x in n %}
+			<td>{{x}}</td>
+			{% endfor %}
+		</tr>   
+		{% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<p> Sample Librarian name: Li, Wang, Lee</p>
+<p> Case is insensitive </p>
+
+
+</body>
+</div>
+<hr>
+{% include "footer.html" %}
