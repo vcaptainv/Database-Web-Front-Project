@@ -1,0 +1,44 @@
+{% include "header.html" %}
+
+<div class="container container-body">
+<body>
+<h1>Table Search</h1>
+<p>You can inspect specific Table here: </p>
+<hr>
+<form method="POST" action="/table_search">
+<tr><td>Select Table: </td>
+	<td>
+		<select name="dropdown1">
+			<option value="" selected disabled hidden>Choose here</option>
+    		{% for one in librariantable %}
+    		<option value = "{{one}}" > {{one}}</option>
+    		{% endfor %}
+		</select>
+	</td>
+
+<to><input type = 'submit' value = 'search' /></to></tr>
+</form>
+
+<h3>Table name you entry is: {{tablename}}</h3>
+<div class="Librarian">           
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      {% for cname in columnname %}
+        <th>{{cname}}</th>
+      {% endfor %}
+      </tr>
+    </thead>
+	<tbody>
+    	{% for n in data %}
+		<tr>
+			{% for x in n %}
+			<td>{{x}}</td>
+			{% endfor %}
+		</tr>   
+		{% endfor %}
+    </tbody>
+  </table>
+</body>
+</div>
+{% include "footer.html" %}
