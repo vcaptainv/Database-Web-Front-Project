@@ -20,7 +20,13 @@ But you can get a sense of the application by looking at my code.
 
 *University Search allows users to see all books at a particular school
 
-##Screenshot of the webpages
+## Some features about the project
+* Server is writtend in Flask
+* Database is POSTGRESQL
+* Webpage are written in HTML format with Bootstrap format
+## Screenshot of the webpages
+
+Screen Shot 2019-11-20 at 10.00.10 PM
 
 
 ## The two most interesting operations
