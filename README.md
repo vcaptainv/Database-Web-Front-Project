@@ -25,8 +25,9 @@ But you can get a sense of the application by looking at my code.
 * Database is POSTGRESQL
 * Webpage are written in HTML format with Bootstrap format
 ## Screenshot of the webpages
+
 ![Image of the Website]
-(https://github.com/vcaptainv/Database-Web-Front-Project/blob/master/sample%20image.png)
+(./screen shot.png)
 
 
 ## The two most interesting operations
