@@ -25,8 +25,8 @@ But you can get a sense of the application by looking at my code.
 * Database is POSTGRESQL
 * Webpage are written in HTML format with Bootstrap format
 ## Screenshot of the webpages
-
-Screen Shot 2019-11-20 at 10.00.10 PM
+![Image of the Website]
+(https://github.com/vcaptainv/Database-Web-Front-Project/blob/master/sample%20image.png)
 
 
 ## The two most interesting operations
