@@ -26,7 +26,7 @@ app = Flask(__name__, template_folder=tmpl_dir)
 #
 # The following is a dummy URI that does not connect to a valid database. You will need to modify it to connect to your Part 2 database in order to use the data.
 #
-# XXX: The URI should be in the format of: 
+# XXX: The URI should be in the format of:
 #
 #     postgresql://USER:PASSWORD@104.196.18.7/w4111
 #
@@ -68,7 +68,7 @@ librariantable = ['students', 'book', 'journal', 'dvd', 'library', 'librarian', 
 @app.before_request
 def before_request():
   """
-  This function is run at the beginning of every web request 
+  This function is run at the beginning of every web request
   (every time you enter an address in the web browser).
   We use it to setup a database connection that can be used throughout the request.
 
@@ -77,7 +77,7 @@ def before_request():
   try:
     g.conn = engine.connect()
   except:
-    print "uh oh, problem connecting to database"
+    print("uh oh, problem connecting to database")
     import traceback; traceback.print_exc()
     g.conn = None
 
@@ -102,7 +102,7 @@ def teardown_request(exception):
 #       @app.route("/foobar/", methods=["POST", "GET"])
 #
 # PROTIP: (the trailing / in the path is important)
-# 
+#
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
@@ -148,14 +148,14 @@ def table_search():
   # You can see an example template in templates/index.html
   #
   # context are the variables that are passed to the template.
-  # for example, "data" key in the context variable defined below will be 
+  # for example, "data" key in the context variable defined below will be
   # accessible as a variable in index.html:
   #
   #     # will print: [u'grace hopper', u'alan turing', u'ada lovelace']
   #     <div>{{data}}</div>
-  #     
+  #
   #     # creates a <div> tag for each element in data
-  #     # will print: 
+  #     # will print:
   #     #
   #     #   <div>grace hopper</div>
   #     #   <div>alan turing</div>
@@ -166,7 +166,7 @@ def table_search():
   #     {% endfor %}
   #
   context = dict(data = names)
-  
+
 
 
   #
@@ -177,7 +177,7 @@ def table_search():
 
 #
 # This is an example of a different path.  You can see it at:
-# 
+#
 #     localhost:8111/another
 #
 # Notice that the function name is another() rather than index()
@@ -198,7 +198,7 @@ def add():
   g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
   return redirect('/')
 
-	
+
 @app.route("/table_search" , methods=['POST'])
 def table():
 	tablename = request.form.get('dropdown1')
@@ -214,20 +214,20 @@ def location():
 	entity = request.form.get('entityname')
 	name = request.form.get('bookname')
 	#print(name)
-	locations = []	
+	locations = []
 	cursor = g.conn.execute("SELECT b.{}name, l.libraryname, l.address FROM {} b, library l WHERE b.libraryname = l.libraryname AND lower(b.{}name) like '%%{}%%' GROUP BY b.{}name, l.libraryname, l.address".format(str(entity), str(entity), str(entity), str(name), str(entity)))
 	for result in cursor:
-		locations.append(result)		
+		locations.append(result)
 	cursor.close()
-		
+
 	if not locations:
 		locations = [['Your Current Search result is Empty']]
-	
+
 	return render_template('location_search.html', entity = entity, locations = locations, name = name)
-	
+
 @app.route('/university_search', methods = ['GET', 'POST'])
 def university():
-	
+
 	schoolnames = str(request.form.get('schoolname')).replace(" ", '')
 	print( schoolnames + 'is here')
 	cursor4 = g.conn.execute("SELECT * FROM BOOK B WHERE B.libraryname IN( SELECT L.libraryname FROM library L INNER JOIN school S ON L.schoolname = S.schoolname WHERE LOWER(L.schoolname) LIKE LOWER('%%{}%%'))".format(str(schoolnames)))
@@ -239,8 +239,8 @@ def university():
 	if not schoolbooks:
 		schoolbooks = [['Your Current Search Result is Empty']]
 	print(schoolbooks)
-	
-	
+
+
 	university = []
 	print('before cursor3 is runned')
 	cursor3 = g.conn.execute("SELECT * FROM school")
@@ -260,15 +260,15 @@ def checkBooks():
 	print books
 	cursor.close()
 	return render_template('checkedBooks.html', books = books, name = name, columnname = columnnamedict['book'])
-	
-	
+
+
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	username = request.form.get('username')
 	passcode = request.form.get('passcode')
 	person = request.form.get('person')
-	if not person: 
+	if not person:
 		person = 'student'
 	print(username)
 	print(passcode)
@@ -277,7 +277,7 @@ def login():
 		cursor =  g.conn.execute("SELECT * FROM students s where lower(s.name) = lower('{}') and lower(s.sid) = lower('{}')".format(str(username), str(passcode)))
 	elif person == 'librarian':
 		cursor =  g.conn.execute("SELECT * FROM librarian l where lower(l.name) = lower('{}') and l.ssn = '{}'".format(str(username), str(passcode)))
-	
+
 
 	success = []
 	for result in cursor:
@@ -285,7 +285,7 @@ def login():
 	print(success)
 	output = 'Login Success. Welcome {} {}'.format(str(person), str(username))
 	print('before if not success')
-	if not success: 
+	if not success:
 		output = 'Log In failed. Please Renter Check Your ID Number'
 		print('not success')
 	print('before close cursor')
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     """
 
     HOST, PORT = host, port
-    print "running on %s:%d" % (HOST, PORT)
+    print("running on %s:%d" % (HOST, PORT))
     app.run(host=HOST, port=PORT, debug=debug, threaded=threaded)
 
 
